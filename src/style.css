@@ -1,0 +1,169 @@
+:root {
+  --white: #fff;
+  --purple: oklch(20% 0.06 300);
+
+  /*font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;*/
+  /*line-height: 1.5;*/
+  /*font-weight: 400;*/
+
+  /*color-scheme: light dark;*/
+  /*color: rgba(255, 255, 255, 0.87);*/
+  color: var(--white);
+  background-color: var(--purple);
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/*a {*/
+/*  font-weight: 500;*/
+/*  color: #646cff;*/
+/*  text-decoration: inherit;*/
+/*}*/
+/*a:hover {*/
+/*  color: #535bf2;*/
+/*}*/
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  justify-content: center;
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+/*h1 {*/
+/*  font-size: 3.2em;*/
+/*  line-height: 1.1;*/
+/*}*/
+
+/*button {*/
+/*  border-radius: 8px;*/
+/*  border: 1px solid transparent;*/
+/*  padding: 0.6em 1.2em;*/
+/*  font-size: 1em;*/
+/*  font-weight: 500;*/
+/*  font-family: inherit;*/
+/*  background-color: #1a1a1a;*/
+/*  cursor: pointer;*/
+/*  transition: border-color 0.25s;*/
+/*}*/
+/*button:hover {*/
+/*  border-color: #646cff;*/
+/*}*/
+/*button:focus,*/
+/*button:focus-visible {*/
+/*  outline: 4px auto -webkit-focus-ring-color;*/
+/*}*/
+
+.start-reset-toggle {
+  cursor: pointer;
+
+  .start, .reset-1, .reset-2, input {
+    display: none;
+  }
+
+  input:not(:checked) ~ .reset-1, input:checked ~ .reset-2 {
+    display: inline;
+  }
+}
+
+.play-pause-toggle {
+  cursor: pointer;
+
+  .play, .pause, .draining, input {
+    display: none;
+  }
+
+  input:not(:checked) ~ .pause, input:not(:checked) ~ .draining, input:checked ~ .play {
+    display: inline;
+  }
+}
+
+.battery-outline {
+  padding: 16px;
+  border: 12px solid var(--white);
+  border-radius: 2px;
+  height: 64vh;
+  max-width: 70vw;
+  aspect-ratio: 1.4 / 2;
+  position: relative;
+
+  --end-width: 36%;
+  --end-height: 4%;
+
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    left: calc((100% - var(--end-width)) / 2);
+    width: var(--end-width);
+    height: var(--end-height);
+    background-color: var(--white);
+  }
+
+  &::before {
+    top: calc(-12px - var(--end-height));
+  }
+
+  &::after {
+    bottom: calc(-12px - var(--end-height));
+  }
+}
+
+.battery-drainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--purple);
+  width: 100%;
+}
+
+.controls:has(.start-reset-toggle input:checked) ~ .battery .battery-drainer {
+  animation: 12s linear forwards running battery-drain-1;
+}
+
+.controls:has(.start-reset-toggle input:not(:checked)) ~ .battery .battery-drainer {
+  animation: 12s linear forwards running battery-drain-2;
+}
+
+.controls:has(.play-pause-toggle input:checked) ~ .battery .battery-drainer {
+  animation-play-state: paused;
+}
+
+.battery-blocks {
+  height: 100%;
+
+  --height-gaps: 2.5%;
+  --height-blocks: calc((100% - var(--height-gaps) * 7) / 8);
+  --height-added: calc(var(--height-blocks) + var(--height-gaps));
+  background: linear-gradient(to bottom,
+  var(--white) var(--height-blocks), var(--purple) var(--height-blocks), var(--purple) var(--height-added), var(--white) var(--height-added),
+  var(--white) calc(var(--height-added) + var(--height-blocks)), var(--purple) calc(var(--height-added) + var(--height-blocks)), var(--purple) calc(var(--height-added) * 2), var(--white) calc(var(--height-added) * 2),
+  var(--white) calc(var(--height-added) * 2 + var(--height-blocks)), var(--purple) calc(var(--height-added) * 2 + var(--height-blocks)), var(--purple) calc(var(--height-added) * 3), var(--white) calc(var(--height-added) * 3),
+  var(--white) calc(var(--height-added) * 3 + var(--height-blocks)), var(--purple) calc(var(--height-added) * 3 + var(--height-blocks)), var(--purple) calc(var(--height-added) * 4), var(--white) calc(var(--height-added) * 4),
+  var(--white) calc(var(--height-added) * 4 + var(--height-blocks)), var(--purple) calc(var(--height-added) * 4 + var(--height-blocks)), var(--purple) calc(var(--height-added) * 5), var(--white) calc(var(--height-added) * 5),
+  var(--white) calc(var(--height-added) * 5 + var(--height-blocks)), var(--purple) calc(var(--height-added) * 5 + var(--height-blocks)), var(--purple) calc(var(--height-added) * 6), var(--white) calc(var(--height-added) * 6),
+  var(--white) calc(var(--height-added) * 6 + var(--height-blocks)), var(--purple) calc(var(--height-added) * 6 + var(--height-blocks)), var(--purple) calc(var(--height-added) * 7), var(--white) calc(var(--height-added) * 7),
+  var(--white) calc(var(--height-added) * 7 + var(--height-blocks)), var(--purple) calc(var(--height-added) * 7 + var(--height-blocks)));
+  /* TODO: add subtle color gradient for different blocks */
+}
+
+@keyframes battery-drain-1 {
+  from {
+    height: 0%;
+  }
+  to {
+    height: 100%;
+  }
+}
+
+@keyframes battery-drain-2 {
+  from {
+    height: 0%;
+  }
+  to {
+    height: 100%;
+  }
+}
