@@ -6,25 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Office Battery</title>
     <link href="/src/style.css" rel="stylesheet" />
-
+    <script type="text/javascript" src="/src/main.js" defer></script>
   </head>
   <body>
     <div class="controls">
-      <label class="start-reset-toggle">
-        <input type="checkbox" />
-        <span class="reset-1">Reset</span>
-        <span class="reset-2">Reset</span>
-      </label>
-      <label class="play-pause-toggle">
-        <input type="checkbox" />
-        <span class="play">&#9658; Play</span>
-        <span class="pause">&#10074;&#10074; Pause </span>
+      <div class="play-pause-toggle">
+        <button class="play-button">
+          <span class="play">&#9658; Play</span>
+        </button>
+        <button class="pause-button">
+          <span class="pause">&#10074;&#10074; Pause </span>
+        </button>
         <span class="draining">Draining...</span>
-      </label>
+      </div>
     </div>
+
+    <button class="reset-button">
+      <span class="reset">⟲ Reset</span>
+    </button>
+
+    <button class="coffee-button">
+      <span class="coffee">☕ Coffee</span>
+    </button>
+
     <div class="battery battery-outline">
       <div class="battery-drainer"></div>
       <div class="battery-blocks"></div>
     </div>
+
+    <dialog>
+      Go home!!
+      <button>Ok</button>
+    </dialog>
   </body>
 </html>

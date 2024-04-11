@@ -16,73 +16,37 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-/*a {*/
-/*  font-weight: 500;*/
-/*  color: #646cff;*/
-/*  text-decoration: inherit;*/
-/*}*/
-/*a:hover {*/
-/*  color: #535bf2;*/
-/*}*/
-
 body {
   margin: 0;
-  display: flex;
+  display: grid;
   place-items: center;
-  justify-content: center;
-  min-width: 100vw;
-  min-height: 100vh;
-}
-
-/*h1 {*/
-/*  font-size: 3.2em;*/
-/*  line-height: 1.1;*/
-/*}*/
-
-/*button {*/
-/*  border-radius: 8px;*/
-/*  border: 1px solid transparent;*/
-/*  padding: 0.6em 1.2em;*/
-/*  font-size: 1em;*/
-/*  font-weight: 500;*/
-/*  font-family: inherit;*/
-/*  background-color: #1a1a1a;*/
-/*  cursor: pointer;*/
-/*  transition: border-color 0.25s;*/
-/*}*/
-/*button:hover {*/
-/*  border-color: #646cff;*/
-/*}*/
-/*button:focus,*/
-/*button:focus-visible {*/
-/*  outline: 4px auto -webkit-focus-ring-color;*/
-/*}*/
-
-.start-reset-toggle {
-  cursor: pointer;
-
-  .start, .reset-1, .reset-2, input {
-    display: none;
-  }
-
-  input:not(:checked) ~ .reset-1, input:checked ~ .reset-2 {
-    display: inline;
-  }
+  width: 100vw;
+  height: 100vh;
 }
 
 .play-pause-toggle {
-  cursor: pointer;
+  .play-button {
+    display: inline-block;
+  }
 
-  .play, .pause, .draining, input {
+  .pause-button, .draining {
     display: none;
   }
 
-  input:not(:checked) ~ .pause, input:not(:checked) ~ .draining, input:checked ~ .play {
-    display: inline;
+  &[data-animation-playing] {
+    .play-button {
+      display: none;
+    }
+
+    .pause-button, .draining {
+      display: inline-block;
+    }
+
   }
 }
 
 .battery-outline {
+  margin-block-end: 4%;
   padding: 16px;
   border: 12px solid var(--white);
   border-radius: 2px;
@@ -104,11 +68,11 @@ body {
   }
 
   &::before {
-    top: calc(-12px - var(--end-height));
+    top: calc(-11px - var(--end-height));
   }
 
   &::after {
-    bottom: calc(-12px - var(--end-height));
+    bottom: calc(-11px - var(--end-height));
   }
 }
 
@@ -118,17 +82,8 @@ body {
   left: 0;
   background-color: var(--purple);
   width: 100%;
-}
-
-.controls:has(.start-reset-toggle input:checked) ~ .battery .battery-drainer {
-  animation: 12s linear forwards running battery-drain-1;
-}
-
-.controls:has(.start-reset-toggle input:not(:checked)) ~ .battery .battery-drainer {
-  animation: 12s linear forwards running battery-drain-2;
-}
-
-.controls:has(.play-pause-toggle input:checked) ~ .battery .battery-drainer {
+  /*TODO: animatie wijzigen naar 8 uur durend*/
+  animation: 12s linear forwards battery-drain;
   animation-play-state: paused;
 }
 
@@ -150,16 +105,19 @@ body {
   /* TODO: add subtle color gradient for different blocks */
 }
 
-@keyframes battery-drain-1 {
-  from {
-    height: 0%;
-  }
-  to {
-    height: 100%;
-  }
+/*TODO: change colors/gradient*/
+dialog::backdrop {
+  background-image: linear-gradient(
+    45deg,
+    magenta,
+    rebeccapurple,
+    dodgerblue,
+    green
+  );
+  opacity: 0.75;
 }
 
-@keyframes battery-drain-2 {
+@keyframes battery-drain {
   from {
     height: 0%;
   }
