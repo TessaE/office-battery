@@ -7,35 +7,63 @@
     <title>Office Battery</title>
     <link href="/src/style.css" rel="stylesheet" />
     <script type="text/javascript" src="/src/main.js" defer></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js" defer></script>
   </head>
   <body>
-    <div class="controls">
-      <div class="play-pause-toggle">
-        <button class="play-button">
-          <span class="play">&#9658; Play</span>
-        </button>
-        <button class="pause-button">
-          <span class="pause">&#10074;&#10074; Pause </span>
-        </button>
-        <span class="draining">Draining...</span>
+    <div class="grid-wrapper">
+      <div class="controls">
+        <div class="play-pause-toggle">
+          <button class="play-button">
+            <span class="play">&#9658; Play</span>
+          </button>
+          <button class="pause-button">
+            <span class="pause">&#10074;&#10074; Pause</span>
+          </button>
+          <span class="draining">Draining...</span>
+        </div>
+
+        <div class="buttons-wrapper">
+          <button class="reset-button">
+            <span class="reset">⟲ Reset</span>
+          </button>
+
+          <button class="coffee-button">
+            <span class="coffee">☕ Coffee</span>
+          </button>
+
+          <button class="bug-button">
+            <span class="bug">🐞 Frustrating bug</span>
+          </button>
+
+          <button class="solved-bug-button">
+            <span class="solved-bug">🎉 Solved bug</span>
+          </button>
+        </div>
+
+        <p class="noise-level-label">🔊 Noise level:</p>
+        <div class="noise-settings">
+          <button class="minus-button" disabled="true"><span class="minus">-</span></button>
+          <span class="noise-level">1</span>
+          <button class="plus-button"><span class="plus">+</span></button>
+        </div>
+      </div>
+
+      <div class="indicators">
+        <p class="time-left">Time left: <span class="time-left-value"></span></p>
+        <p class="separator"> | </p>
+        <p class="playback-rate">Drain rate: x <span class="playback-rate-value"></span></p>
+      </div>
+
+      <div class="battery-wrapper">
+        <div class="battery battery-outline">
+          <div class="battery-drainer"></div>
+          <div class="battery-blocks"></div>
+        </div>
       </div>
     </div>
 
-    <button class="reset-button">
-      <span class="reset">⟲ Reset</span>
-    </button>
-
-    <button class="coffee-button">
-      <span class="coffee">☕ Coffee</span>
-    </button>
-
-    <div class="battery battery-outline">
-      <div class="battery-drainer"></div>
-      <div class="battery-blocks"></div>
-    </div>
-
     <dialog>
-      Go home!!
+      <span>Go home!!</span>
       <button>Ok</button>
     </dialog>
   </body>
