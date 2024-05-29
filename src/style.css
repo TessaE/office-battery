@@ -1,11 +1,11 @@
 @font-face {
   font-family: "Freeman";
-  src: url("/public/Freeman-Regular.ttf");
+  src: url("../public/Freeman-Regular.ttf") format("opentype");
 }
 
 @font-face {
   font-family: "Outfit";
-  src: url("/public/Outfit-Medium.ttf");
+  src: url("../public/Outfit-Medium.ttf") format("opentype");
 }
 
 :root {
