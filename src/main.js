@@ -31,11 +31,13 @@ playButton.addEventListener('click', () => {
   playPauseToggle.toggleAttribute('data-animation-playing');
   animation.play()
   intervalId = setInterval(setTimeLeft, 1000);
+  document.title = "Draining...";
 });
 pauseButton.addEventListener('click', () => {
   playPauseToggle.toggleAttribute('data-animation-playing');
   animation.pause();
   clearInterval(intervalId);
+  document.title = "Office Battery";
 });
 resetButton.addEventListener('click', () => {
   reset();
@@ -81,8 +83,11 @@ noiseHigherButton.addEventListener('click', () => {
 });
 
 animation.oncancel = () => playPauseToggle.toggleAttribute('data-animation-playing', false);
-animation.onfinish = () => dialog.showModal();
-// TODO: also change title of page on finish (& reset after reset)
+animation.onfinish = () => {
+  document.title = "Go home!!";
+  dialog.showModal();
+}
+
 okButton.addEventListener('click', () => {
   reset();
   dialog.close();
@@ -141,6 +146,7 @@ const reset = () => {
   toggleNoiseButtons();
   setTimeLeft();
   clearInterval(intervalId);
+  document.title = "Office Battery";
 }
 
 setPlaybackRate(animation.playbackRate);
